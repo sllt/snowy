@@ -1,0 +1,29 @@
+{% extends 'admin/layout.html' %}
+
+{% block main %}
+
+    <div class="container">
+        <div class="breadcrumb">
+          <a href="/admin">Root</a> &gt;
+            <span class="current">概览</span>
+
+        </div>
+    </div>
+    <div class="container-box">
+        <div class="group">
+          <h2>最新帖子</h2>
+          <ul>
+            {% for topic in topics.list %}
+              <li><a href="/t/{{ topic.id }}#reply{{ topic.reply_count or 0 }}">{{ topic.title }}</a><br></li>
+            {% endfor %}
+          </ul>
+          <h2>统计信息</h2>
+          <ul>
+                <li>用户: {{ status_counter.users }}人</li>
+                <li>帖子: {{ status_counter.topics }}个</li>
+                <li>回复: {{ status_counter.replies }}条</li>
+                <li>节点：{{ status_counter.nodes }}</li>
+          </ul>
+        </div>
+    </div>
+{% endblock %}

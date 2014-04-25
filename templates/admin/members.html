@@ -1,0 +1,45 @@
+{% extends 'admin/layout.html' %}
+
+
+{% block main %}
+<div class="container">
+        <div class="breadcrumb">
+          <a href="/admin">Root</a> &gt;
+            <span class="current">会员管理</span>
+
+        </div>
+</div>
+<div class="ui-content">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>#</td>
+                <th>用户</td>
+                <th>操作</td>
+            </tr>
+        </thead>
+        <tbody>
+        {% set i =1 -%}
+        {% for member in members.list %}
+            <tr>
+            <td>{{ i}}</td>
+            {% set i=i+1 -%}
+            <td>
+            <div class="member">
+                <a href="/u/{{ member.username }}">
+                    <img src="/static/avatar/s_{{ member.avatar or 'default.png' }}" alt="" class="avatar" />
+                </a>
+                <span class="username">
+                    <a href="/u/{{ member.username }}">{{ member.username }}</a>
+                </span>
+                
+            </div>
+            </td>
+            <td><a href="/u/{{ member.uid }}/delete">删除</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
