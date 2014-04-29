@@ -134,6 +134,7 @@ class Filters():
         content = re.sub(r'(http:\/\/\w+.sinaimg.cn\/.*?\.(jpg|gif|png))', r'<img src="\1" />', content)
         # render @ mention links
         content = re.sub(r'@(\w+)(\s|)', r'@<a href="/u/\1">\1</a> ', content)
+        content = re.sub(r':(\w+)(\s|):', r'<img style="width:20px;height:20px;" id="e_1" class="emoji" src="http://www.emoji-cheat-sheet.com/graphics/emojis/\1.png" />', content)
         # render youku videos
         # content = re.sub(r'http://v.youku.com/v_show/id_(\w+).html', r'<iframe height=498 width=510 src="http://player.youku.com/embed/\1" frameborder=0 allowfullscreen style="height:498px;width:510px;"></iframe>', content)
         return content

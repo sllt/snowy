@@ -37,5 +37,24 @@ class MembersHandler(BaseHandler):
 	def get(self, template_variables = {}):
 		template_variables["gen_random"] = gen_random
 		template_variables["members"] = self.user_model.get_users_by_latest(num = 49)
+		user_info = self.get_current_user()
+		if user_info.username not in self.admin : self.redirect("/")
 		self.render("admin/members.html",**template_variables)
+		
+class NodesHandler(BaseHandler):
+	def get(self,template_variables = {}):
+		template_variables["gen_random"] = gen_random
+		template_variables["planes"]=self.plane_model.get_all_planes_with_nodes()
+
+		self.render("admin/node.html",**template_variables)
+
+class TopicsHandler(BaseHandler):
+	
+	def get(self,template_variables = {}):
+		template_variables["gen_random"] = gen_random
+		page = int(self.get_argument("p", "1"))
+		print "page=",page
+		template_variables["topics"]=self.topic_model.get_all_topics(current_page = page)
+
+		self.render("admin/topic.html",**template_variables)
 		

@@ -1,0 +1,28 @@
+{%  extends 'admin/layout.html' %}
+{% block main %}
+<div class="container">
+        <div class="breadcrumb">
+          <a href="/admin">Root</a> &gt;
+            <span class="current">节点管理 </span>
+
+        </div>
+</div>
+<div class="ui-content">
+	<div class="container-box">
+		{% for plane in planes %}
+                <li>
+                    <label for="">{{ plane.name }} 
+                    	<a href="/plane/{{ plane.id }}/add">   增加节点</a>
+                    </label>
+
+                    <span class="nodes">
+                        {% for node in plane.nodes %}
+                            <a href="/node/{{ node.slug }}">{{ node.name }}</a>
+                        {% endfor %}
+                    </span>
+                </li>
+            {% endfor %}
+	</div>
+</div>
+
+{% endblock %}
