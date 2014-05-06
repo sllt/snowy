@@ -1,5 +1,10 @@
 {% extends 'snippet/layout.html' %}
 
+{% block stylesheet %}
+    <link rel="stylesheet" href="/static/simditor/styles/simditor.css" />
+    <link rel="stylesheet" href="/static/simditor/styles/font-awesome.css" />
+{% endblock %}
+
 {% block javascript %}
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
@@ -18,6 +23,23 @@
             });
         });
     </script>
+
+    <script type="text/javascript" src="/static/simditor/scripts/js/module.js"></script>
+    <script type="text/javascript" src="/static/simditor/scripts/js/simditor-all.min.js"></script>
+    <script type="text/javascript" src="/static/simditor/scripts/js/uploader.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            var editor = new Simditor({
+                textarea: $('#txt-content'),
+                placeholder: '正文',
+                pasteImage: false,
+                toolbar: ['title', 'bold', 'italic', 'underline', 'ol', 'ul', 'blockquote', 'code', 'table', 'link', 'image'],
+                upload: {
+                    url: '/upload'
+                }
+            });
+        });
+    </script>
 {% endblock %}
 
 {% block main %}
@@ -33,7 +55,7 @@
                     <span class="add-on">#</span>
                     <input class="span11" id="prependedInput" type="text" placeholder="主题" name="title">
                 </div>
-                <textarea rows="3" class="content mt5 smart-code-support" placeholder="正文" name="content"></textarea>
+                <textarea rows="3" id="txt-content" class="content mt5 smart-code-support" placeholder="正文" name="content"></textarea>
                 <input type="submit" id="checkall" class="btn btn-small" value="立即创建">
                 {{ xsrf_form_html() }}
             </form>

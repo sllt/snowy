@@ -6,9 +6,11 @@
 
 {% block stylesheet %}
     <link rel="stylesheet" href="/static/css/codehilite.css" />
+    <link rel="stylesheet" href="/static/simditor/styles/codehilite.css" />
 {% endblock %}
 
 {% block javascript %}
+    
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
             tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
@@ -131,7 +133,7 @@
             </div>
         </div>
         <div class="ui-content">
-            {{ topic.content|markdown|content_process }}
+            {{ topic.content|content_process }}
         </div>
         <div class="ui-footer">
             {% if not topic_favorited %}
